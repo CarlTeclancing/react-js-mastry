@@ -1,0 +1,103 @@
+.activity-list {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.list-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.hours-info {
+  background: #667eea;
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.activities {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.activity-item:hover {
+  background: #f0f0f0;
+  border-color: #667eea;
+}
+
+.activity-item.completed {
+  opacity: 0.7;
+}
+
+.activity-item.completed .activity-name {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.activity-checkbox {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-checkbox .checked {
+  color: #28a745;
+}
+
+.activity-checkbox .unchecked {
+  color: #bbb;
+  transition: color 0.3s ease;
+}
+
+.activity-checkbox:hover .unchecked {
+  color: #667eea;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.activity-hours {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
