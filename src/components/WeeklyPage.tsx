@@ -1,8 +1,8 @@
 import { ChevronLeft, ChevronRight, CheckCircle2, Circle } from 'lucide-react';
 import { WeekData } from '../types/index';
-import TaskList from './TaskList';
-import ActivityList from './ActivityList';
-import NotesSection from './NotesSection';
+import TaskList from './TaskList.tsx';
+import ActivityList from './ActivityList.tsx';
+import NotesSection from './NotesSection.tsx';
 import './WeeklyPage.css';
 
 interface WeeklyPageProps {

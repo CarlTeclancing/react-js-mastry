@@ -1,6 +1,6 @@
 import { WeekData } from '../types/index';
-import WeekCard from './WeekCard';
-import ProgressBar from './ProgressBar';
+import WeekCard from './WeekCard.tsx';
+import ProgressBar from './ProgressBar.tsx';
 import './Dashboard.css';
 
 interface DashboardProps {

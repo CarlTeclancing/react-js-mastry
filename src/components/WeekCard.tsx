@@ -1,6 +1,6 @@
 import { CheckCircle2, Clock } from 'lucide-react';
 import { WeekData } from '../types/index';
-import ProgressBar from './ProgressBar';
+import ProgressBar from './ProgressBar.tsx';
 import './WeekCard.css';
 
 interface WeekCardProps {

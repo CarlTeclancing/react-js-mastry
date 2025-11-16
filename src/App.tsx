@@ -3,9 +3,9 @@ import { useInternTracker } from './hooks/useInternTracker';
 import { useUserManagement } from './hooks/useUserManagement';
 import { initialInternData } from './data/weeklyData';
 import Header from './components/Header';
-import Navigation from './components/Navigation';
-import WeeklyPage from './components/WeeklyPage';
-import Dashboard from './components/Dashboard';
+import Navigation from './components/Navigation.tsx';
+import WeeklyPage from './components/WeeklyPage.tsx';
+import Dashboard from './components/Dashboard.tsx';
 import UserAuth from './components/UserAuth';
 import './App.css';
 
@@ -17,18 +17,12 @@ function App() {
     allUsers, 
     createUser, 
     loginUser, 
-    logoutUser 
+    logoutUser,
+    isLoading
   } = useUserManagement();
 
-  const { 
-    data, 
-    toggleTask, 
-    toggleActivity, 
-    updateNotes, 
-    getWeekData, 
-    getOverallProgress 
-  } = useInternTracker(initialInternData, userSession?.internId);
-  
+  // Always call hooks at top level
+  const tracker = useInternTracker(initialInternData, userSession?.internId);
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
   const [selectedWeek, setSelectedWeek] = useState<number>(1);
 
@@ -37,7 +31,10 @@ function App() {
     setCurrentView('week');
   };
 
-  // Show login screen if no user is logged in
+  if (isLoading) {
+    return <div style={{width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>;
+  }
+
   if (!userSession) {
     return (
       <UserAuth
@@ -49,6 +46,16 @@ function App() {
       />
     );
   }
+
+  // Only use tracker data if userSession exists
+  const { 
+    data, 
+    toggleTask, 
+    toggleActivity, 
+    updateNotes, 
+    getWeekData, 
+    getOverallProgress 
+  } = tracker;
 
   return (
     <div className="app-container">

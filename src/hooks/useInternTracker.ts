@@ -1,39 +1,40 @@
 import { useState, useCallback, useEffect } from 'react';
 import { InternData, WeekData } from '../types/index';
 
-export const useInternTracker = (initialData: InternData, userId?: string) => {
-  const [data, setData] = useState<InternData>(() => {
-    if (!userId) return initialData;
 
-    // Load user-specific data from localStorage
+export const useInternTracker = (initialData: InternData, userId?: string) => {
+  const [data, setData] = useState<InternData>(initialData);
+
+  // Reload user progress from localStorage whenever userId changes
+  useEffect(() => {
+    if (!userId) {
+      setData(initialData);
+      return;
+    }
     const storageKey = `internTrackerData_${userId}`;
     const saved = localStorage.getItem(storageKey);
-    
     if (saved) {
       try {
-        return JSON.parse(saved);
+        setData(JSON.parse(saved));
+        return;
       } catch (error) {
         console.error('Error parsing stored data:', error);
-        return initialData;
       }
     }
-    
+    // If no saved data, initialize and save
     const newData = {
       ...initialData,
       id: userId,
       createdAt: new Date().toISOString(),
       lastUpdated: new Date().toISOString(),
     };
-    
-    // Save the initial data to localStorage immediately
     try {
       localStorage.setItem(storageKey, JSON.stringify(newData));
     } catch (error) {
       console.error('Error saving initial data:', error);
     }
-    
-    return newData;
-  });
+    setData(newData);
+  }, [userId, initialData]);
 
   // Save data to localStorage whenever it changes and we have a userId
   useEffect(() => {
